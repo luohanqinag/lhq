@@ -1,33 +1,26 @@
-# This is a basic workflow to help you get started with Actions
+name: ‘EE Action WeChat Bot’
 
-name: CI
+on: 
+  #push:
+    #branches: 
+      #- master
+  schedule:
+    - cron: "34 8 * * *"
 
-# Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: 'Run Wechat Bot Note'
+      uses: fifsky/wechat-work-action@v0.0.1
+      with:
+        # wechat work robot webhook
+        url:  https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60fff090-3ef2-4a18-bbb4-30551547e999
+        # message type
+        type: text # optional, default is text
+        # message content
+        at: all
+        content: "还没有进行健康打卡的小伙伴请抓紧时间咯~"
