@@ -1,0 +1,26 @@
+name: ‘EE Action WeChat Bot’
+
+on: 
+  #push:
+    #branches: 
+      #- master
+  schedule:
+    - cron: "44 8 * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'Run Wechat Bot Note'
+      uses: fifsky/wechat-work-action@v0.0.1
+      with:
+        # wechat work robot webhook
+        url:  https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60fff090-3ef2-4a18-bbb4-30551547e999
+        # message type
+        type: text # optional, default is text
+        # message content
+        at: all
+        content: "还没有进行健康打卡的小伙伴请抓紧时间咯~"
